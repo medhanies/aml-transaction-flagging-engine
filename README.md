@@ -5,7 +5,8 @@ A rules-based anti-money-laundering (AML) transaction monitoring engine in pure 
 ```
 git clone https://github.com/medhanies/aml-transaction-flagging-engine.git
 cd aml-transaction-flagging-engine
-python -m aml_engine run --seed 42
+pip install -e .
+aml-engine run --seed 42
 ```
 
 No dependencies. Python 3.11+ and the standard library only.
@@ -23,6 +24,13 @@ Generate synthetic datasets, visualize alerts, and explore detection rules inter
 - **Export**: Download results as CSV for further analysis
 
 No installation required—everything runs client-side in your browser using Python compiled to WebAssembly.
+
+To run the dashboard locally (it must be served over HTTP, not opened as a file):
+
+```
+python -m http.server 8000
+# then open http://localhost:8000/docs/
+```
 
 > **Disclaimer** — This is an educational/portfolio project. All data is synthetic. The jurisdiction lists are point-in-time snapshots (as of the February 2025 FATF plenary) and the FATF greylist in particular changes three times a year. Nothing here is a compliance tool; verify everything against primary sources ([OFAC](https://ofac.treasury.gov/sanctions-programs-and-country-information), [FATF](https://www.fatf-gafi.org/en/countries/black-and-grey-lists.html), [FinCEN](https://www.fincen.gov)) before any real-world use.
 
