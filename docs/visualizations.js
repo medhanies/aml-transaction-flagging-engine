@@ -48,7 +48,7 @@ function updateSeverityCards(alerts) {
     };
 
     alerts.forEach(alert => {
-        const severity = alert.risk_tier || 'LOW';
+        const severity = alert.tier || 'LOW';
         if (severityCounts.hasOwnProperty(severity)) {
             severityCounts[severity]++;
         }
@@ -129,7 +129,7 @@ function renderSeverityDistributionChart(alerts) {
     };
 
     alerts.forEach(alert => {
-        const severity = alert.risk_tier || 'LOW';
+        const severity = alert.tier || 'LOW';
         if (severityCounts.hasOwnProperty(severity)) {
             severityCounts[severity]++;
         }
@@ -176,11 +176,11 @@ function renderSeverityDistributionChart(alerts) {
 function renderTopCustomersChart(customerRisks) {
     // Sort by risk_score descending and take top 10
     const topCustomers = [...(customerRisks || [])]
-        .sort((a, b) => (b.risk_score || 0) - (a.risk_score || 0))
+        .sort((a, b) => (b.score || 0) - (a.score || 0))
         .slice(0, 10);
 
-    const labels = topCustomers.map(c => (c.name || 'Unknown').substring(0, 15));
-    const data = topCustomers.map(c => c.risk_score || 0);
+    const labels = topCustomers.map(c => (c.customer_name || 'Unknown').substring(0, 15));
+    const data = topCustomers.map(c => c.score || 0);
 
     const ctx = document.getElementById('topCustomersChart').getContext('2d');
 
@@ -233,20 +233,20 @@ function populateWorklistTable(customerRisks) {
     }
 
     // Sort by risk_score descending
-    const sorted = [...customerRisks].sort((a, b) => (b.risk_score || 0) - (a.risk_score || 0));
+    const sorted = [...customerRisks].sort((a, b) => (b.score || 0) - (a.score || 0));
 
     sorted.forEach(customer => {
         const row = document.createElement('tr');
-        const severity = customer.risk_tier || 'LOW';
+        const severity = customer.tier || 'LOW';
         const severityBadgeHtml = getSeverityBadge(severity);
 
         const flaggedAmount = customer.flagged_amount || 0;
-        const rulesTriggered = (customer.rules_triggered || []).join(', ') || 'N/A';
+        const rulesTriggered = (customer.rules_fired || []).join(', ') || 'N/A';
 
         row.innerHTML = `
             <td><code>${customer.customer_id || 'N/A'}</code></td>
-            <td>${customer.name || 'Unknown'}</td>
-            <td>${formatNumber(customer.risk_score || 0)}</td>
+            <td>${customer.customer_name || 'Unknown'}</td>
+            <td>${formatNumber(customer.score || 0)}</td>
             <td>${severityBadgeHtml}</td>
             <td><small>${rulesTriggered}</small></td>
             <td>${formatCurrency(flaggedAmount)}</td>
@@ -257,10 +257,10 @@ function populateWorklistTable(customerRisks) {
     // Store data for export
     window.currentWorklistData = sorted.map(c => ({
         'Customer ID': c.customer_id || '',
-        'Name': c.name || '',
-        'Risk Score': c.risk_score || 0,
-        'Risk Tier': c.risk_tier || '',
-        'Rules Triggered': (c.rules_triggered || []).join('; '),
+        'Name': c.customer_name || '',
+        'Risk Score': c.score || 0,
+        'Risk Tier': c.tier || '',
+        'Rules Fired': (c.rules_fired || []).join('; '),
         'Flagged Amount': c.flagged_amount || 0
     }));
 }
