@@ -2,14 +2,33 @@
 
 A rules-based anti-money-laundering (AML) transaction monitoring engine in pure Python. It generates a synthetic retail-banking dataset with planted suspicious patterns, runs a catalog of ten detection rules modeled on **BSA/FinCEN regulations, OFAC sanctions programs, and FATF guidance**, scores the results, and produces a SAR-candidate worklist the way a transaction-monitoring system feeds an investigator's queue.
 
+## Quick start
+
+The only requirement is **Python 3.11 or newer** — the engine has zero third-party dependencies. Three ways to try it, easiest first:
+
+**1. In your browser — nothing to install**
+
+**[Open the live demo →](https://medhanies.github.io/aml-transaction-flagging-engine/)** It runs the actual Python engine in your browser via WebAssembly; generate a dataset and explore the alerts interactively.
+
+**2. One command — no clone needed**
+
+```bash
+pip install git+https://github.com/medhanies/aml-transaction-flagging-engine.git
+aml-engine run --seed 42
 ```
+
+**3. From a clone (for browsing the code and running the tests)**
+
+```bash
 git clone https://github.com/medhanies/aml-transaction-flagging-engine.git
 cd aml-transaction-flagging-engine
 pip install -e .
 aml-engine run --seed 42
 ```
 
-No dependencies. Python 3.11+ and the standard library only.
+> On Windows, use `py -m pip` in place of `pip` if `pip` isn't on your PATH. If `aml-engine` isn't found after installing, `python -m aml_engine run --seed 42` does the same thing.
+
+Either way you should see a detection report in a few seconds: alerts by rule with regulatory citations, a SAR-candidate worklist, and validation against the planted scenarios. The same seed always produces identical results.
 
 ## Interactive Web Demo
 
