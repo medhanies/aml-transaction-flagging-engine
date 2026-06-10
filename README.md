@@ -4,35 +4,76 @@ A rules-based anti-money-laundering (AML) transaction monitoring engine in pure 
 
 ## Quick start
 
-The only requirement is **Python 3.11 or newer** — the engine has zero third-party dependencies. Three ways to try it, easiest first:
-
-**1. In your browser — nothing to install**
-
-**[Open the live demo →](https://medhanies.github.io/aml-transaction-flagging-engine/)** It runs the actual Python engine in your browser via WebAssembly; generate a dataset and explore the alerts interactively.
-
-**2. One command — no clone needed**
+**⚠️ You need Python 3.11 or newer.** The engine has zero third-party dependencies, but it does require a recent Python. Check first:
 
 ```bash
-pip install git+https://github.com/medhanies/aml-transaction-flagging-engine.git
+python3 --version          # macOS/Linux
+# or
+python --version           # Windows
+```
+
+If you see Python 3.11 or higher, you're good. If not, scroll down to "Python too old?" below.
+
+---
+
+### Three ways to run it (easiest first)
+
+**1. In your browser — nothing to install, no Python needed**
+
+**[Open the live demo →](https://medhanies.github.io/aml-transaction-flagging-engine/)** It runs the actual Python engine in your browser via WebAssembly; generate a dataset and explore the alerts interactively. Works on any device with a modern browser.
+
+**2. One command — no clone needed (requires Python 3.11+)**
+
+```bash
+pip3 install git+https://github.com/medhanies/aml-transaction-flagging-engine.git   # macOS/Linux
+# or
+pip install git+https://github.com/medhanies/aml-transaction-flagging-engine.git    # Windows
 aml-engine run --seed 42
 ```
 
-**3. From a clone (for browsing the code and running the tests)**
+**3. From a clone (for browsing the code, running tests — requires Python 3.11+)**
 
 ```bash
 git clone https://github.com/medhanies/aml-transaction-flagging-engine.git
 cd aml-transaction-flagging-engine
-pip install -e .
+pip3 install -e .          # macOS/Linux: pip3 install -e .
 aml-engine run --seed 42
 ```
 
-> **macOS / Linux:** use `python3` and `pip3` in place of `python` and `pip` (e.g. `pip3 install git+...`). On a Mac, check `python3 --version` first — the system Python is older than 3.11, so install a current one with [Homebrew](https://brew.sh) (`brew install python`) if needed.
->
-> **Windows:** use `py -m pip` in place of `pip` if `pip` isn't on your PATH.
->
-> If the `aml-engine` command isn't found after installing, `python3 -m aml_engine run --seed 42` (Windows: `python -m aml_engine run --seed 42`) does the same thing.
+---
+
+### Python too old?
+
+If your `python3 --version` shows **Python 3.9 or 3.10**, you have two choices:
+
+**A. Use the browser demo (option 1) — zero setup, no Python upgrade needed**
+Just open the link above.
+
+**B. Install Python 3.11+ first, then use options 2 or 3**
+
+On **macOS**, the easiest way is [Homebrew](https://brew.sh):
+```bash
+brew install python
+python3 --version          # verify it's now 3.11+
+pip3 install git+https://github.com/medhanies/aml-transaction-flagging-engine.git
+aml-engine run --seed 42
+```
+
+On **Linux**, use your package manager (apt, yum, etc.) to install `python3.11` or `python3.12`.
+
+On **Windows**, download from [python.org](https://www.python.org/downloads/) and run the installer (check "Add Python to PATH").
 
 Either way you should see a detection report in a few seconds: alerts by rule with regulatory citations, a SAR-candidate worklist, and validation against the planted scenarios. The same seed always produces identical results.
+
+---
+
+### Command reference
+
+> If the `aml-engine` command isn't found after installing, use `python3 -m aml_engine run --seed 42` (Windows: `python -m aml_engine run --seed 42`) instead.
+>
+> On **macOS/Linux**, always use `python3` and `pip3` (not `python`/`pip`).
+>
+> On **Windows**, use `py -m pip` if `pip` isn't on your PATH: `py -m pip install git+...`
 
 ## Interactive Web Demo
 
