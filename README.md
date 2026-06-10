@@ -26,7 +26,11 @@ pip install -e .
 aml-engine run --seed 42
 ```
 
-> On Windows, use `py -m pip` in place of `pip` if `pip` isn't on your PATH. If `aml-engine` isn't found after installing, `python -m aml_engine run --seed 42` does the same thing.
+> **macOS / Linux:** use `python3` and `pip3` in place of `python` and `pip` (e.g. `pip3 install git+...`). On a Mac, check `python3 --version` first — the system Python is older than 3.11, so install a current one with [Homebrew](https://brew.sh) (`brew install python`) if needed.
+>
+> **Windows:** use `py -m pip` in place of `pip` if `pip` isn't on your PATH.
+>
+> If the `aml-engine` command isn't found after installing, `python3 -m aml_engine run --seed 42` (Windows: `python -m aml_engine run --seed 42`) does the same thing.
 
 Either way you should see a detection report in a few seconds: alerts by rule with regulatory citations, a SAR-candidate worklist, and validation against the planted scenarios. The same seed always produces identical results.
 
@@ -47,7 +51,7 @@ No installation required—everything runs client-side in your browser using Pyt
 To run the dashboard locally (it must be served over HTTP, not opened as a file):
 
 ```
-python -m http.server 8000
+python -m http.server 8000        # macOS/Linux: python3 -m http.server 8000
 # then open http://localhost:8000/docs/
 ```
 
