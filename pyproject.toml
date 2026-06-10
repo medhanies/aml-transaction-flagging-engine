@@ -29,6 +29,7 @@ dev = ["pytest>=7.4"]
 aml-engine = "aml_engine.__main__:main"
 
 [tool.setuptools.packages.find]
+where = ["src"]
 include = ["aml_engine*"]
 
 [tool.pytest.ini_options]
