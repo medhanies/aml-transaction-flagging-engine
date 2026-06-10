@@ -10,6 +10,20 @@ python -m aml_engine run --seed 42
 
 No dependencies. Python 3.11+ and the standard library only.
 
+## Interactive Web Demo
+
+**[Try the live demo →](https://medhanies.github.io/aml-transaction-flagging-engine/)** (runs entirely in your browser via [Pyodide](https://pyodide.org))
+
+Generate synthetic datasets, visualize alerts, and explore detection rules interactively:
+
+- **Control panel**: Seed, customer count, observation window
+- **Summary dashboard**: Dataset stats and severity breakdown (CRITICAL/HIGH/MEDIUM/LOW)
+- **Visualizations**: Alerts by rule, severity distribution, top flagged customers
+- **SAR worklist**: Ranked customer list with risk scores, rules fired, and flagged amounts
+- **Export**: Download results as CSV for further analysis
+
+No installation required—everything runs client-side in your browser using Python compiled to WebAssembly.
+
 > **Disclaimer** — This is an educational/portfolio project. All data is synthetic. The jurisdiction lists are point-in-time snapshots (as of the February 2025 FATF plenary) and the FATF greylist in particular changes three times a year. Nothing here is a compliance tool; verify everything against primary sources ([OFAC](https://ofac.treasury.gov/sanctions-programs-and-country-information), [FATF](https://www.fatf-gafi.org/en/countries/black-and-grey-lists.html), [FinCEN](https://www.fincen.gov)) before any real-world use.
 
 ## Why these rules
